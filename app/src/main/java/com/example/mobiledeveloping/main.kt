@@ -68,6 +68,10 @@ fun main_3()
     var b: Int = 100
     for(i in a..b)
     {
+        for(j in a..b)
+        {
+            print(j)
+        }
 
     }
 }
