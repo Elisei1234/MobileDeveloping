@@ -64,13 +64,20 @@ fun main_2_2()
 // Найдите все пары дружественных чисел на отрезке [a;b].
 fun main_3()
 {
-    var a: Int = 1
-    var b: Int = 100
-    for(i in a..b)
+    print("Введите число: ")
+    var num1 = readln().toInt()
+    print("Введите 2 число(больше первого): ")
+    var num2 = readln().toInt()
+    var sum1: Int
+    var sum2: Int
+
+    for(i in num1..num2)
     {
-        for(j in a..b)
+        for(j in i + 1..num2)
         {
-            print(j)
+            for(t in 0..j - 1)
+
+            print()
         }
 
     }
