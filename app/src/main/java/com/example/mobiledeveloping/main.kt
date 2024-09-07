@@ -73,11 +73,25 @@ fun main_3()
 
     for(i in num1..num2)
     {
+        sum1 = 0
+        sum2 = 0
+
+        for(t in 1..i)
+        {
+            if (i % t == 0)
+                sum1 += t
+        }
+
         for(j in i + 1..num2)
         {
-            for(t in 0..j - 1)
+            for(t in 1..j)
+            {
+                if (j % t == 0)
+                    sum2 += t
+            }
 
-            print()
+            if (sum1 == j && sum2 == i)
+                println("Числа $i и $j - дружественные")
         }
 
     }
