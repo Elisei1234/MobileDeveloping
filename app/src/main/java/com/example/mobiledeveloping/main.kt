@@ -90,23 +90,18 @@ fun main_3() {
 // т.е. 1-ю со 2-ой, 3-ю с 4-й и т.д. Результат выведите на экран.
 fun main_4()
 {
-
-    fun swapAdjacentRows(array: Array<IntArray>) {
-        for (i in 0 until array.size - 1 step 2) {
-            val temp = array[i]
-            array[i] = array[i + 1]
-            array[i + 1] = temp
-        }
-
-    }
-
     val array = arrayOf(
-        intArrayOf(1, 2, 3),
-        intArrayOf(4, 5, 6),
-        intArrayOf(7, 8, 9),
-        intArrayOf(10, 11, 12)
+        arrayOf(1, 2, 3),
+        arrayOf(4, 5, 6),
+        arrayOf(7, 8, 9),
+        arrayOf(10, 11, 12)
     )
-    swapAdjacentRows(array)
+
+    for (i in 0 until array.size - 1 step 2) {
+        val temp = array[i]
+        array[i] = array[i + 1]
+        array[i + 1] = temp
+    }
 
     for (row in array) {
         for (element in row) {
@@ -123,10 +118,3 @@ fun main_4()
 //	Базовый класс должен быть абстрактным, содержать хотя бы два свойства, и хотя бы одну функцию,
 //	которую будут наследовать дочерние классы.
 //	Приветствуется использование модификаторов доступа.
-
-
-
-
-
-
-
