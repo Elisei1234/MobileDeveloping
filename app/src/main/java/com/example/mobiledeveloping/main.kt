@@ -3,7 +3,7 @@ package com.example.mobiledeveloping
 
 fun main()
 {
-    main_3()
+    main_4()
 
 }
 
@@ -72,12 +72,37 @@ fun main_3() {
 
 
 //Задание 4. Массивы и коллекции
+
 //10.	В двухмерном массиве переставьте попарно соседние строки,
 // т.е. 1-ю со 2-ой, 3-ю с 4-й и т.д. Результат выведите на экран.
 fun main_4()
 {
 
+    fun swapAdjacentRows(array: Array<IntArray>) {
+        for (i in 0 until array.size - 1 step 2) {
+            val temp = array[i]
+            array[i] = array[i + 1]
+            array[i + 1] = temp
+        }
+
+    }
+
+    val array = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 5, 6),
+        intArrayOf(7, 8, 9),
+        intArrayOf(10, 11, 12)
+    )
+    swapAdjacentRows(array)
+
+    for (row in array) {
+        for (element in row) {
+            print("$element ")
+        }
+        println()
+    }
 }
+
 
 
 
