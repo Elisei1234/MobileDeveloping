@@ -4,6 +4,7 @@ package com.example.mobiledeveloping
 fun main()
 {
     main_3()
+
 }
 
 
@@ -59,41 +60,13 @@ fun main_2_2()
 
 
 //Задание 3 – Циклы.
-//23.	Два числа называются дружественными, если каждое из них равно сумме
-// всех делителей второго не считая самого этого числа.
-// Найдите все пары дружественных чисел на отрезке [a;b].
-fun main_3()
-{
-    print("Введите число: ")
-    var num1 = readln().toInt()
-    print("Введите 2 число(больше первого): ")
-    var num2 = readln().toInt()
-    var sum1: Int
-    var sum2: Int
-
-    for(i in num1..num2)
-    {
-        sum1 = 0
-        sum2 = 0
-
-        for(t in 1..i)
-        {
-            if (i % t == 0)
-                sum1 += t
+//
+fun main_3() {
+    for (i in 1..5) {
+        for (j in 1..i) {
+            print("*")
         }
-
-        for(j in i + 1..num2)
-        {
-            for(t in 1..j)
-            {
-                if (j % t == 0)
-                    sum2 += t
-            }
-
-            if (sum1 == j && sum2 == i)
-                println("Числа $i и $j - дружественные")
-        }
-
+        println()
     }
 }
 
@@ -105,6 +78,7 @@ fun main_4()
 {
 
 }
+
 
 
 
