@@ -4,3 +4,8 @@ fun LabWork2()
 {
 
 }
+
+fun task1()
+{
+
+}
