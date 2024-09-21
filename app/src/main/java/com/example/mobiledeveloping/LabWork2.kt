@@ -4,8 +4,8 @@ fun main()
 {
     println("Введите любое целочисленное значение")
     var number = readln().toInt()
-    println(task1(number))
-    //task2()
+    //println(task1(number))
+    println(task2(number))
     //task3()
 }
 
@@ -22,4 +22,13 @@ fun task1(number: Int) : Int?
     {
         return number * number
     }
+}
+
+
+//3.	Написать лямбда-выражение. Входящий параметр Int. Выходящий Boolean.
+// Действие лямбды – если входящий параметр является трехзначным числом (от 100 до 999), вернуть true, иначе вернуть false.
+
+val task2 = {num: Int ->
+    if(num > 99 && num < 1000) true
+    else false
 }
