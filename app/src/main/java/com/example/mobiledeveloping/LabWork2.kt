@@ -1,7 +1,5 @@
 package com.example.mobiledeveloping
 
-import kotlin.random.Random
-
 fun main()
 {
     //println("Введите любое целочисленное значение")
@@ -9,7 +7,7 @@ fun main()
     //println(task1(number))
     //println(task2(number))
     println("Введите размерность массива: ")
-    var n = readln().toInt()
+    val n = readln().toInt()
     val array = IntArray(size = n)
     for(i in 0 until array.size)
     {
