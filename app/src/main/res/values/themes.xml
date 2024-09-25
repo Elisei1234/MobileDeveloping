@@ -2,4 +2,6 @@
 <resources>
 
     <style name="Theme.MobileDeveloping" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Mobile_Developing" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
