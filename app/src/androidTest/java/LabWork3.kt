@@ -16,6 +16,9 @@ fun main()
     println(calculateSquareRoot(5.0))
     println(calculateSquareRoot(null))
     */
+
+    //println(getStringLength("clown"))
+    //println(getStringLength(null))
 }
 
 
@@ -32,8 +35,7 @@ fun task1()
     //Вывелось то, чему равна переменная "a"
 }
 
-//Задание 2. Элвис-оператор. Функция должна возвращать полное имя в формате "Имя Фамилия".
-//Если какое-либо значение равно null, то вместо него должно использоваться слово "Unknown".
+//Задание 2. Элвис-оператор.
 fun getFullName(firstName: String?, LastName: String?): String?
 {
     val fname = firstName ?: "Unknown"
@@ -43,9 +45,6 @@ fun getFullName(firstName: String?, LastName: String?): String?
 }
 
 //Задание 3. Оператор !!
-//Напишите функцию calculateSquareRoot, которая принимает число типа Double?.
-// Если переданное значение равно null, функция должна выбросить исключение.
-// В противном случае — вернуть квадратный корень числа.
 fun calculateSquareRoot(numb: Double?): Double
 {
     val l = numb ?: throw IllegalArgumentException("Предсказуемая ошибка, новичковая")
@@ -55,8 +54,11 @@ fun calculateSquareRoot(numb: Double?): Double
 
 
 //Задание 4. Безопасное приведение типов
-fun getStringLength()
+fun getStringLength(clown :Any?): Int
 {
-
+    val mini_clown = clown as? String
+    val max_clown : Int
+    if(mini_clown == null)max_clown = -1 else max_clown = mini_clown.length
+    return max_clown
 }
 
