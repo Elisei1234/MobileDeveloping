@@ -1,3 +1,5 @@
+import kotlin.math.sqrt
+
 fun main()
 {
     //task1()
@@ -10,6 +12,10 @@ fun main()
     *///task2
 
 
+    /*task3
+    println(calculateSquareRoot(5.0))
+    println(calculateSquareRoot(null))
+    */
 }
 
 
@@ -23,7 +29,7 @@ fun task1()
     a = "abc"
     var text: String = a
     println(text)
-    //Вывелось то, чему равна переменная
+    //Вывелось то, чему равна переменная "a"
 }
 
 //Задание 2. Элвис-оператор. Функция должна возвращать полное имя в формате "Имя Фамилия".
@@ -36,8 +42,20 @@ fun getFullName(firstName: String?, LastName: String?): String?
     return Name
 }
 
+//Задание 3. Оператор !!
+//Напишите функцию calculateSquareRoot, которая принимает число типа Double?.
+// Если переданное значение равно null, функция должна выбросить исключение.
+// В противном случае — вернуть квадратный корень числа.
+fun calculateSquareRoot(numb: Double?): Double
+{
+    val l = numb ?: throw IllegalArgumentException("Предсказуемая ошибка, новичковая")
+    var sqrt = sqrt(l!!)
+    return sqrt
+}
 
-fun calculateSquareRoot(numb: Double?)
+
+//Задание 4. Безопасное приведение типов
+fun getStringLength()
 {
 
 }
