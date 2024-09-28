@@ -16,6 +16,12 @@ fun main()
 
     println("Исходный массив: ")
     _Array(array)
+    var arrayTask1 = array.map(::task1)
+    print(arrayTask1)
+    var arrayTask2 = array.filter(task2)
+    print(arrayTask2)
+    var arrayTask12 = array.filter(task2).map(::task1)
+    print(arrayTask12)
 
 }
 
