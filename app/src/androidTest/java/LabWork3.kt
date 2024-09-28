@@ -1,0 +1,4 @@
+fun LabWork3()
+{
+
+}
