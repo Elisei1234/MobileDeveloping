@@ -57,4 +57,4 @@ fun _Array(numbers: IntArray)
 //Task 5.
 //1. (Int, Int, String) -> Unit.
 //2. () -> String.
-//3. () -> .
+//3. (()->Unit) -> Unit.
