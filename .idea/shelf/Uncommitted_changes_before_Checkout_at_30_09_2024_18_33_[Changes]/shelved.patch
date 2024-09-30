@@ -1,0 +1,197 @@
+Index: app/src/main/java/com/example/Main.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example\r\n\r\n\r\nfun main()\r\n{\r\n    //main_1()\r\n    //main_2()\r\n    //main_2_2()\r\n    //main_3()\r\n    //main_4()\r\n\r\n}\r\n\r\n\r\n//Задание 1 – Вычисление.\r\n//8.\tПользователь вводит время в минутах и расстояние в километрах. Найдите скорость в м/c.\r\nfun main_1 () {\r\n\r\n    print(\"Введите время в минутах: \")\r\n    var min = readln().toInt()\r\n    print(\"Введите расстояние в км: \")\r\n    var km = readln().toInt()\r\n\r\n    var speed = (km * 1000) / (min * 60)\r\n\r\n    println(\"Скорость в м/c равна = $speed\")\r\n\r\n}\r\n\r\n\r\n//Задание 2 – Условные конструкции. Решить двумя способами – с помощью\r\n// обычного if, с помощью конструкции when\r\n//5.\tПользователь вводит два числа. Если они не равны 10 и первое число четное, то вывести их сумму, иначе вывести их произведение.\r\nfun main_2() {\r\n\r\n    println(\"В случае, где числа не равны 10 и первое чётное выводится сумма, иначе произведение \")\r\n\r\n    print(\"Введите число: \")\r\n    var num1 = readln().toInt()\r\n    print(\"Введите 2 число: \")\r\n    var num2 = readln().toInt()\r\n\r\n    if(num1 != 10 && num2 != 10 && num1 % 2 == 0)\r\n    {\r\n        var sum = num1 + num2\r\n        print(\"Сумма чисел = $sum\")\r\n    }\r\n    else\r\n    {\r\n        var mult = num1 * num2\r\n        print(\"Произведение чисел = $mult\")\r\n    }\r\n}\r\n\r\n\r\nfun main_2_2()\r\n{\r\n    print(\"Введите число: \")\r\n    var num1 = readln().toInt()\r\n    print(\"Введите 2 число: \")\r\n    var num2 = readln().toInt()\r\n\r\n    var sum = num1 + num2\r\n    var mult = num1 * num2\r\n\r\n    when\r\n    {\r\n        (num1 != 10 && num2 !=10 && num1 % 2 == 0) -> print(\"Сумма чисел = $sum\")\r\n        else -> println(\"Произведение чисел = $mult\")\r\n    }\r\n\r\n}\r\n\r\n\r\n//Задание 3 – Циклы.\r\n//\r\nfun main_3() {\r\n    for (i in 1..5) {\r\n        for (j in 1..i) {\r\n            print(\"*\")\r\n        }\r\n        println()\r\n    }\r\n}\r\n\r\n\r\n//Задание 4. Массивы и коллекции\r\n\r\n//10.\tВ двухмерном массиве переставьте попарно соседние строки,\r\n// т.е. 1-ю со 2-ой, 3-ю с 4-й и т.д. Результат выведите на экран.\r\nfun main_4()\r\n{\r\n    val array = arrayOf(\r\n        arrayOf(1, 2, 3),\r\n        arrayOf(4, 5, 6),\r\n        arrayOf(7, 8, 9),\r\n        arrayOf(10, 11, 12)\r\n    )\r\n\r\n    for (i in 0 until array.size - 1 step 2) {\r\n        val temp = array[i]\r\n        array[i] = array[i + 1]\r\n        array[i + 1] = temp\r\n    }\r\n\r\n    for (row in array) {\r\n        for (element in row) {\r\n            print(\"$element \")\r\n        }\r\n        println()\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/Main.kt b/app/src/main/java/com/example/Main.kt
+--- a/app/src/main/java/com/example/Main.kt	
++++ b/app/src/main/java/com/example/Main.kt	
+@@ -3,110 +3,56 @@
+ 
+ fun main()
+ {
+-    //main_1()
+-    //main_2()
+-    //main_2_2()
+-    //main_3()
+-    //main_4()
++    //println("Введите любое целочисленное значение")
++    //var number = readln().toInt()
++    //println(task1(number))
++    //println(task2(number)
+ 
+-}
++    println("Введите размерность массива: ")
++    val n = readln().toInt()
++    val array = IntArray(size = n)
++    for(i in 0 until array.size)
++    {
++        array[i] = (-100 until 501).random()
++    }
+ 
+-
+-//Задание 1 – Вычисление.
+-//8.	Пользователь вводит время в минутах и расстояние в километрах. Найдите скорость в м/c.
+-fun main_1 () {
+-
+-    print("Введите время в минутах: ")
+-    var min = readln().toInt()
+-    print("Введите расстояние в км: ")
+-    var km = readln().toInt()
+-
+-    var speed = (km * 1000) / (min * 60)
+-
+-    println("Скорость в м/c равна = $speed")
+-
++    println("Исходный массив ")
++    _Array(array)
++    var arrayTask1 = array.map(::task1)
++    print(arrayTask1)
++    var arrayTask2 = array.filter(task2)
++    print(arrayTask2)
++    var arrayTask12 = array.filter(task2).map(::task1)
++    print(arrayTask12)
+ }
+ 
+-
+-//Задание 2 – Условные конструкции. Решить двумя способами – с помощью
+-// обычного if, с помощью конструкции when
+-//5.	Пользователь вводит два числа. Если они не равны 10 и первое число четное, то вывести их сумму, иначе вывести их произведение.
+-fun main_2() {
+-
+-    println("В случае, где числа не равны 10 и первое чётное выводится сумма, иначе произведение ")
+-
+-    print("Введите число: ")
+-    var num1 = readln().toInt()
+-    print("Введите 2 число: ")
+-    var num2 = readln().toInt()
+-
+-    if(num1 != 10 && num2 != 10 && num1 % 2 == 0)
++fun task1(number: Int) : Int?
++{
++    if(number % 2 !=0)
+     {
+-        var sum = num1 + num2
+-        print("Сумма чисел = $sum")
++        return null
+     }
+     else
+     {
+-        var mult = num1 * num2
+-        print("Произведение чисел = $mult")
++        return number * number
+     }
+ }
+ 
+ 
+-fun main_2_2()
+-{
+-    print("Введите число: ")
+-    var num1 = readln().toInt()
+-    print("Введите 2 число: ")
+-    var num2 = readln().toInt()
+-
+-    var sum = num1 + num2
+-    var mult = num1 * num2
+-
+-    when
+-    {
+-        (num1 != 10 && num2 !=10 && num1 % 2 == 0) -> print("Сумма чисел = $sum")
+-        else -> println("Произведение чисел = $mult")
+-    }
+-
++val task2 = {num: Int ->
++    if(num > 99 && num < 1000) true
++    else false
+ }
+ 
+-
+-//Задание 3 – Циклы.
+-//
+-fun main_3() {
+-    for (i in 1..5) {
+-        for (j in 1..i) {
+-            print("*")
+-        }
+-        println()
++//Task3
++fun _Array(numbers: IntArray)
++{
++    for(i in 0..numbers.size - 1)
++    {
++        print("${numbers[i]}  ")
++        // print("  ")
+     }
+ }
+ 
+ 
+-//Задание 4. Массивы и коллекции
+-
+-//10.	В двухмерном массиве переставьте попарно соседние строки,
+-// т.е. 1-ю со 2-ой, 3-ю с 4-й и т.д. Результат выведите на экран.
+-fun main_4()
+-{
+-    val array = arrayOf(
+-        arrayOf(1, 2, 3),
+-        arrayOf(4, 5, 6),
+-        arrayOf(7, 8, 9),
+-        arrayOf(10, 11, 12)
+-    )
+-
+-    for (i in 0 until array.size - 1 step 2) {
+-        val temp = array[i]
+-        array[i] = array[i + 1]
+-        array[i + 1] = temp
+-    }
+ 
+-    for (row in array) {
+-        for (element in row) {
+-            print("$element ")
+-        }
+-        println()
+-    }
+-}
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\r\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -1,10 +1,17 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
+         <option name="resolveExternalAnnotations" value="false" />
+       </GradleProjectSettings>
+     </option>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
