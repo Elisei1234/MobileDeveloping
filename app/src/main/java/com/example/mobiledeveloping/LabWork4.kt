@@ -112,10 +112,6 @@ fun SecondScreen() {
             }
 
         }
-
-
-
-
     }
 }
 
