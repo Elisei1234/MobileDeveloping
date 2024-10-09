@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -82,17 +83,21 @@ fun SecondScreen() {
         Column(
 
             modifier = Modifier.fillMaxHeight()
-                .padding(padding),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(padding)
+
         ){
-            Text("Hello. Thats your last chats", modifier = Modifier.padding(15.dp))
+            Text("Hello. Thats your last chats", modifier = Modifier
+                .padding(15.dp),
+                textAlign = TextAlign.Left
+            )
             LazyColumn(){
                 items(100){index->
                     Row (
 
                     ){
                         Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "desc", modifier = Modifier
-                            .size(100.dp)
+                            .padding(10.dp)
+                            .size(70.dp)
                             .clip(CircleShape)
                             .background(color = Color.Gray)
                         )
