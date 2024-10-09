@@ -1,13 +1,20 @@
 package com.example.mobiledeveloping
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
@@ -23,6 +30,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -69,6 +79,36 @@ fun SecondScreen() {
 
     ) {padding ->
         padding
+        Column(
+
+            modifier = Modifier.fillMaxHeight()
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Text("Hello. Thats your last chats", modifier = Modifier.padding(15.dp))
+            LazyColumn(){
+                items(100){index->
+                    Row (
+
+                    ){
+                        Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "desc", modifier = Modifier
+                            .size(100.dp)
+                            .clip(CircleShape)
+                            .background(color = Color.Gray)
+                        )
+                        Column (){
+                            Text("Chat number $index")
+                            Text("That a simple example for chat number $index. I " +
+                                    "just want to see this text on two lines so that you can try to make a restriction")
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+
 
 
     }
