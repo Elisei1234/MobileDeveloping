@@ -3,6 +3,7 @@ package com.example.mobiledeveloping
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,11 +31,19 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontFamily.Companion.Monospace
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,13 +95,14 @@ fun SecondScreen() {
                 .padding(padding)
 
         ){
-            Text("Hello. Thats your last chats", modifier = Modifier
+            Text("Hello! Thats your last chats", modifier = Modifier
                 .padding(15.dp),
-                textAlign = TextAlign.Left
+                textAlign = TextAlign.Left,
+                fontWeight = FontWeight.Bold
             )
             LazyColumn(){
                 items(100){index->
-                    Row (
+                    Row (modifier = Modifier.bottomBorder(1.dp, Color.Black)
 
                     ){
                         Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "desc", modifier = Modifier
@@ -102,7 +112,7 @@ fun SecondScreen() {
                             .background(color = Color.Gray)
                         )
                         Column (){
-                            Text("Chat number $index")
+                            Text("Chat number $index", fontFamily = Monospace, fontWeight = FontWeight.Bold)
                             Text("That a simple example for chat number $index. I " +
                                     "just want to see this text on two lines so that you can try to make a restriction")
                         }
@@ -120,3 +130,23 @@ fun SecondScreen() {
 private fun preview() {
     SecondScreen()
 }
+
+
+fun Modifier.bottomBorder(strokeWidth: Dp, color: Color) = composed(
+    factory = {
+        val density = LocalDensity.current
+        val strokeWidthPx = density.run { strokeWidth.toPx() }
+
+        Modifier.drawBehind {
+            val width = size.width
+            val height = size.height - strokeWidthPx/2
+
+            drawLine(
+                color = color,
+                start = Offset(x = 0f, y = height),
+                end = Offset(x = width , y = height),
+                strokeWidth = strokeWidthPx
+            )
+        }
+    }
+)
