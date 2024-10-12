@@ -1,12 +1,16 @@
 package com.example.mobiledeveloping
 
 import android.graphics.drawable.Icon
+import android.provider.ContactsContract.Profile
+import android.widget.DatePicker
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,41 +49,54 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SecondScreen() {
+fun MainScreen(navController: NavController, viewModel: MainViewModel
+= viewModel()
+) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("My First App") },
                 navigationIcon = {
-                    IconButton(onClick = {}){
-                        Icon(Icons.Filled.FavoriteBorder, contentDescription = "Menu" )
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.FavoriteBorder, contentDescription = "Menu")
                     }
                 }
             )
         },
         bottomBar = {
-            BottomAppBar{
-                Row(modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween) {
+            BottomAppBar {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
 
-                    IconButton(onClick = {})
+                    IconButton(onClick = { viewModel.onCalendarClick() }, Modifier.size(50.dp))
                     {
-                        Icon(Icons.Filled.DateRange, contentDescription = "Date",
-                            modifier = Modifier.size(40.dp))
+                        Icon(
+                            Icons.Filled.DateRange, contentDescription = "Date",
+                            modifier = Modifier.size(40.dp)
+                        )
                     }
-                    IconButton(onClick = {})
+                    IconButton(onClick = { viewModel.onHomeClick() }, Modifier.size(50.dp))
                     {
-                        Icon(Icons.Filled.Home, contentDescription = "Home",
-                            modifier = Modifier.size(40.dp))
+                        Icon(
+                            Icons.Filled.Home, contentDescription = "Home",
+                            modifier = Modifier.size(40.dp)
+                        )
 
                     }
-                    IconButton(onClick = {})
+                    IconButton(onClick = { viewModel.onCalendarClick() }, Modifier.size(50.dp))
                     {
-                        Icon(Icons.Filled.AccountCircle, contentDescription = "Account",
-                            modifier = Modifier.size(40.dp))
+                        Icon(
+                            Icons.Filled.AccountCircle, contentDescription = "Account",
+                            modifier = Modifier.size(40.dp)
+                        )
 
                     }
                 }
@@ -87,12 +104,24 @@ fun SecondScreen() {
             }
         },
 
-    ) {padding ->
-        padding
+        ) { paddingValues ->
+
+        when {
+            viewModel.isProfileClicked.value -> Profile(paddingValues)
+            viewModel.isHomeClicked.value -> ChatList(paddingValues)
+            viewModel.isCalendarClicked.value -> Calendar(paddingValues)
+        }
+    }
+}
+
+@Composable
+fun ChatList(paddingValues: PaddingValues){
+
         Column(
 
-            modifier = Modifier.fillMaxHeight()
-                .padding(padding)
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(paddingValues)
 
         ){
             Text("Hello! Thats your last chats", modifier = Modifier
@@ -123,13 +152,26 @@ fun SecondScreen() {
 
         }
     }
+
+@Composable
+fun Profile(paddingValues: PaddingValues){
+    Text(text = "Clownich")
 }
+
+
+@Composable
+fun Calendar(paddingValues: PaddingValues){
+    Text(text = "Clown")
+}
+
 
 @Preview
 @Composable
 private fun preview() {
-    SecondScreen()
+    MainScreen(rememberNavController())
 }
+
+
 
 
 fun Modifier.bottomBorder(strokeWidth: Dp, color: Color) = composed(
