@@ -55,9 +55,7 @@ import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, viewModel: MainViewModel
-= viewModel()
-) {
+fun MainScreen(navController: NavController, viewModel: MainViewModel = viewModel()) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -91,7 +89,7 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel
                         )
 
                     }
-                    IconButton(onClick = { viewModel.onCalendarClick() }, Modifier.size(50.dp))
+                    IconButton(onClick = { viewModel.onProfileClick() }, Modifier.size(50.dp))
                     {
                         Icon(
                             Icons.Filled.AccountCircle, contentDescription = "Account",
@@ -108,14 +106,14 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel
 
         when {
             viewModel.isProfileClicked.value -> Profile(paddingValues)
-            viewModel.isHomeClicked.value -> ChatList(paddingValues)
+            viewModel.isHomeClicked.value -> ChatList(paddingValues, navController)
             viewModel.isCalendarClicked.value -> Calendar(paddingValues)
         }
     }
 }
 
 @Composable
-fun ChatList(paddingValues: PaddingValues){
+fun ChatList(paddingValues: PaddingValues, navController: NavController){
 
         Column(
 
@@ -131,7 +129,12 @@ fun ChatList(paddingValues: PaddingValues){
             )
             LazyColumn(){
                 items(100){index->
-                    Row (modifier = Modifier.bottomBorder(1.dp, Color.Black)
+                    Row (
+                        modifier = Modifier
+                            .bottomBorder(1.dp, Color.Black)
+                            .clickable {
+                                navController.navigate(Screens.ChatScreen.screenName)
+                            }
 
                     ){
                         Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "desc", modifier = Modifier
@@ -155,13 +158,13 @@ fun ChatList(paddingValues: PaddingValues){
 
 @Composable
 fun Profile(paddingValues: PaddingValues){
-    Text(text = "Clownich")
+    Text(text = "Clownich", modifier = Modifier.padding(paddingValues))
 }
 
 
 @Composable
 fun Calendar(paddingValues: PaddingValues){
-    Text(text = "Clown")
+    Text(text = "Clown", modifier = Modifier.padding(paddingValues))
 }
 
 
