@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 
 
 @Composable
-fun ChatScreen(navController: NavController) {
+fun ChatScreen(navController: NavController, index: Int) {
     Column(
         modifier = Modifier
     ) {
@@ -33,5 +33,6 @@ fun ChatScreen(navController: NavController) {
                     .size(40.dp)
             )
         }
+        Text(text = "Ваш чат под номером ")
     }
 }

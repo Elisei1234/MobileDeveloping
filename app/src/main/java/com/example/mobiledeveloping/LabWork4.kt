@@ -120,17 +120,6 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel = viewMode
 
         ) { paddingValues ->
 
-//        Snackbar(
-//            modifier = Modifier
-//                .padding(top = 720.dp)
-//                .height(34.dp),
-//            containerColor = Balbes
-//        ) {
-//            Text(
-//                text = "Popalsya, balbes",
-//                fontSize = 22.sp,
-//            )
-//        }
 
         SnackbarHost(
             modifier = Modifier,

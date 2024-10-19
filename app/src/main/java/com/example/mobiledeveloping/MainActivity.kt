@@ -55,7 +55,10 @@ internal fun AppNavigation(){
         composable(Screens.MainScreen.screenName){
             MainScreen(navController = navController)
         }
-        composable(Screens.ChatScreen.screenName){
+        composable(
+            Screens.ChatScreen.screenName,
+            arguments =
+        ){
             ChatScreen(navController = navController)
         }
 
