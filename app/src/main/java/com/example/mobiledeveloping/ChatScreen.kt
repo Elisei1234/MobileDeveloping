@@ -15,7 +15,6 @@ import androidx.navigation.NavController
 
 @Composable
 fun ChatScreen(navController: NavController) {
-    Text(text = "clown")
     Column(
         modifier = Modifier
     ) {
