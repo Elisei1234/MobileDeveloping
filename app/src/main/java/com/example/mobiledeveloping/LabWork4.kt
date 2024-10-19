@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
@@ -105,9 +106,9 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel = viewMode
         ) { paddingValues ->
 
         when {
-            viewModel.isProfileClicked.value -> Profile(paddingValues)
+            viewModel.isProfileClicked.value -> Profile(paddingValues, navController)
             viewModel.isHomeClicked.value -> ChatList(paddingValues, navController)
-            viewModel.isCalendarClicked.value -> Calendar(paddingValues)
+            viewModel.isCalendarClicked.value -> Calendar(paddingValues, navController)
         }
     }
 }
@@ -157,14 +158,47 @@ fun ChatList(paddingValues: PaddingValues, navController: NavController){
     }
 
 @Composable
-fun Profile(paddingValues: PaddingValues){
-    Text(text = "Clownich", modifier = Modifier.padding(paddingValues))
+fun Profile(paddingValues: PaddingValues, navController: NavController) {
+    Column(
+        modifier = Modifier.padding(paddingValues)
+    ) {
+        Text(text = "Clownnich")
+        IconButton(onClick = {
+            // Check if the navController can pop back stack
+            if (navController.currentBackStackEntry?.destination?.route != null) {
+                navController.popBackStack()
+            }
+        },
+            Modifier.size(50.dp)
+        ) {
+            Icon(
+                Icons.Filled.ArrowBack, contentDescription = "Back",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+    }
 }
 
 
 @Composable
-fun Calendar(paddingValues: PaddingValues){
-    Text(text = "Clown", modifier = Modifier.padding(paddingValues))
+fun Calendar(paddingValues: PaddingValues, navController: NavController){
+    Column(
+        modifier = Modifier.padding(paddingValues)
+    ) {
+        Text(text = "Clown")
+        IconButton(onClick = { },
+            Modifier
+                .size(50.dp)
+        )
+        {
+//            Icon(
+//                Icons.Filled.ArrowBack, contentDescription = "Back",
+//                modifier = Modifier
+//                    .size(40.dp)
+//            )
+        }
+    }
+
 }
 
 
