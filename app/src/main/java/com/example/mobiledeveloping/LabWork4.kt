@@ -157,8 +157,9 @@ fun ChatList(paddingValues: PaddingValues, navController: NavController) {
                     modifier = Modifier
                         .bottomBorder(1.dp, Color.Black)
                         .clickable {
-                            navController.navigate(Screens.ChatScreen.screenName)
+                            navController.navigate(Screens.ChatScreen.screenName + "/$index")
                         }
+
 
                 ) {
                     Image(
@@ -194,7 +195,21 @@ fun Profile(paddingValues: PaddingValues) {
     Column(
         modifier = Modifier.padding(paddingValues)
     ) {
-        Text(text = "Clownich")
+        Text(text = "Hello, Dear User!")
+        Row {
+            Image(painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "avatar",
+                modifier = Modifier
+                    .padding(10.dp)
+                    .size(70.dp)
+                    .clip(CircleShape)
+                    .background(color = Color.Gray))
+            Column {
+                Text(text = "Elisei Sinyaev", modifier = Modifier.padding(10.dp))
+                Text(text = "18.11 years old", modifier = Modifier.padding(7.dp))
+            }
+            
+        }
 
     }
 }

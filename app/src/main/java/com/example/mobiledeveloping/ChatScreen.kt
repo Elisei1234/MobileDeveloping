@@ -11,10 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 
 @Composable
-fun ChatScreen(navController: NavController, index: Int) {
+fun ChatScreen(navController: NavController, argument: Int?) {
     Column(
         modifier = Modifier
     ) {
@@ -33,6 +38,6 @@ fun ChatScreen(navController: NavController, index: Int) {
                     .size(40.dp)
             )
         }
-        Text(text = "Ваш чат под номером ")
+        Text(text = "Это ваш чат под номером $argument")
     }
 }
