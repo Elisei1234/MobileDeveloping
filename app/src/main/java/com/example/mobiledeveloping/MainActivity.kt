@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MobileDevelopingTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -58,7 +57,7 @@ internal fun AppNavigation(){
             MainScreen(navController = navController)
         }
         composable(
-            Screens.ChatScreen.screenName,
+            Screens.ChatScreen.screenName + "/{index}",
             arguments = listOf(navArgument("index"){type = NavType.IntType})
         ){
             navBackStack -> ChatScreen(navController = navController, navBackStack.arguments?.getInt("index"))
