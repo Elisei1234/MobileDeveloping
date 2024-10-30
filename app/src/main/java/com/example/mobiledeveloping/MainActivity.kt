@@ -1,6 +1,8 @@
 package com.example.mobiledeveloping
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -15,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,13 +25,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.mobiledeveloping.ui.theme.MobileDevelopingTheme
+import org.json.JSONObject
 
+
+const val API_KEY = "012c748818fd41bbbdf112239221805"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting("Moscow", this)
                 }
             }
         }
@@ -47,7 +51,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(name: String, context: Context, modifier: Modifier = Modifier) {
     val state = remember{
         mutableStateOf("unknown")
     }
@@ -57,7 +61,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ){
-            Text(text = "Temp in $name!")
+            Text(text = "Temp in $name = ${state.value}")
         }
 
         Box(modifier = Modifier
@@ -67,6 +71,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         )
         {
             Button(onClick = {
+                getResult(name, state, context)
 
             }, modifier = Modifier
                 .padding(5.dp)
@@ -80,11 +85,37 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     }
 }
 
+private fun getResult(city: String, state: MutableState<String>, context: Context){
+    val url = "https://api.weather.com/v1/current.json" +
+            "?key=$API_KEY&"+
+            "q=$city" +
+            "&aqi=no"
+    val queue = Volley.newRequestQueue(context)
+    val stringRequest = StringRequest(
+        Request.Method.GET,
+        url,
+        {
+            response ->
+            val obj = JSONObject(response)
+            state.value = obj.getJSONObject("current").getString("temp_c")
+        },
 
+        {
+            error ->
+            Log.d("Mylog", "Error $error")
+        }
+    )
+    queue.add(stringRequest)
+}
+
+
+
+/*
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     MobileDevelopingTheme {
-        Greeting("Android")
+        Greeting("Android", context)
     }
 }
+ */
