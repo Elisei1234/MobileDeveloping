@@ -23,12 +23,12 @@
         <item> Тополь|topol.png </item>
     </string-array>
 
-    <string-array name="Veg">
+    <string-array name="veg">
         <item> Капуста|kapusta.png </item>
         <item> Свекла|svekla.png </item>
     </string-array>
 
-    <string-array name="Fruits">
+    <string-array name="fruits">
         <item> Яблоко|Apple.png </item>
         <item> Апельсин|orange.png </item>
     </string-array>

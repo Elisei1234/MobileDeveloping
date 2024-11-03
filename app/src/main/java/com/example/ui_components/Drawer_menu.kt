@@ -30,7 +30,6 @@ import com.example.utils.DrawerEvents
 import java.lang.reflect.Modifier
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 
 fun DrawerMenu (onEvent:(DrawerEvents) -> Unit){
     Box(modifier = Modifier.fillmaxSize()){
