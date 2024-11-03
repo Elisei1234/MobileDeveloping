@@ -26,12 +26,13 @@ import androidx.compose.ui.unit.dp
 import com.example.appinfo.ui.theme.BgTrans
 import com.example.appinfo.ui.theme.MainRed
 import com.example.mobiledeveloping.R
+import com.example.utils.DrawerEvents
 import java.lang.reflect.Modifier
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 
-fun DrawerMenu (){
+fun DrawerMenu (onEvent:(DrawerEvents) -> Unit){
     Box(modifier = Modifier.fillmaxSize()){
         Image(painter = painterResource(
             id = R.drawable.drawer_list_bg),
@@ -41,7 +42,10 @@ fun DrawerMenu (){
         )
         Column(modifier = Modifier.fillMaxSize()){
             Header()
-            Body()
+            Body(){event ->
+                onEvent(event)
+
+            }
 
         }
 
@@ -80,7 +84,7 @@ fun Header(){
 }
 
 @Composable
-fun Body(){
+fun Body(onEvent:(DrawerEvents) -> Unit){
     val list = stringArrayResource(id = R.array.drawer_list)
     LazyColumn (modifier = Modifier.fillMaxSize()){
         itemsIndexed(list){index, title ->
@@ -94,7 +98,7 @@ fun Body(){
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable{
-
+                            onEvent(DrawerEvents.OnItemClick(title, index))
                         }
                         .padding(10.dp)
                         .wrapContentWidth(),

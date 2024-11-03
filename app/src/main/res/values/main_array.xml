@@ -7,4 +7,30 @@
         <item> Фрукты </item>
         <item> Овощи </item>
     </string-array>
+
+    <string-array name="mushrooms">
+        <item> Лисичка|lisichka.png </item>
+        <item> Мухамор|Muhomor.png </item>
+    </string-array>
+
+    <string-array name="medicial_herbs">
+        <item> Крапива|krapiva.png </item>
+        <item> Ромашка|Romashka.png </item>
+    </string-array>
+
+    <string-array name="trees">
+        <item> Дуб|Dub.png </item>
+        <item> Тополь|topol.png </item>
+    </string-array>
+
+    <string-array name="Veg">
+        <item> Капуста|kapusta.png </item>
+        <item> Свекла|svekla.png </item>
+    </string-array>
+
+    <string-array name="Fruits">
+        <item> Яблоко|Apple.png </item>
+        <item> Апельсин|orange.png </item>
+    </string-array>
+
 </resources>

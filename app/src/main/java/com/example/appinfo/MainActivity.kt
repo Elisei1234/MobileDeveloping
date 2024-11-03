@@ -20,6 +20,7 @@ import com.example.ui_components.MainTopBar
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import com.example.ui_components.DrawerMenu
+import com.example.utils.DrawerEvents
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val scaffoldState = rememberScaffoldState()
+            val coroutineScope = rememberCaroutineScope()
             val topBarTitle = remember {
                 mutableStateOf("Грибы")
             }
@@ -43,7 +45,17 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     drawerContent = {
-                        DrawerMenu()
+                        Drawer_menu(){event ->
+                            when(event){
+                                is DrawerEvents.OnItemClick ->{
+                                    topBarTitle.value = event.title
+                                }
+                            }
+                            coroutineScope.launch{
+                                scaffoldState.drawerState.close()
+                            }
+
+                        }
                     }
                 ){
 
