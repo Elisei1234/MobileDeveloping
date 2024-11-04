@@ -14,6 +14,7 @@ import com.example.utils.ListItem
 import com.example.utils.Routes
 
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = Routes.MAIN_SCREEN
                 ){
                     composable(Routes.MAIN_SCREEN){
-                        MainScreen(context = this@MainActivity){listItem ->
+                        MainScreen{listItem ->
                             navController.navigate(Routes.INFO_SCREEN)
                         }
                     }

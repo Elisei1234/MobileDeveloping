@@ -11,23 +11,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.example.appinfo.MainViewModel
 import com.example.utils.DrawerEvents
-import com.example.utils.IdArrayList
 import com.example.utils.ListItem
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen (context: Context, onClick: (ListItem) ->Unit) {
+fun MainScreen (
+    mainViewModel: MainViewModel = hiltViewModel(),
+    onClick: (ListItem) -> Unit
+){
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCaroutineScope()
-    val mainList = remember {
-        mutableStateOf(getListItemsByIndex(0, this))
-    }
+    val mainList = mainViewModel.mainList
     val topBarTitle = remember {
         mutableStateOf("Грибы")
     }
+    mainViewModel.getAllItemsByCategory(topBarTitle.value)
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -41,8 +43,8 @@ fun MainScreen (context: Context, onClick: (ListItem) ->Unit) {
                 when (event) {
                     is DrawerEvents.OnItemClick -> {
                         topBarTitle.value = event.title
-                        mainList.value = getListItemsByIndex(
-                            event.index, context)
+                        mainViewModel.getAllItemsBycategory(event.title)
+
                     }
                 }
                 coroutineScope.launch {
@@ -60,20 +62,4 @@ fun MainScreen (context: Context, onClick: (ListItem) ->Unit) {
             }
         }
     }
-}
-
-private fun getListItemsByIndex(index: Int, context: Context): List<ListItem>{
-    val list = ArrayList<ListItem>()
-    val arrayList = context.resources.getStringArray(IdArrayList.listId[index])
-    arrayList.forEach {item ->
-        val itemArray = item.split("|")
-        list.add(
-            ListItem(
-                itemArray[0],
-                itemArray[1],
-                itemArray[2]
-            )
-        )
-    }
-    return list
 }
