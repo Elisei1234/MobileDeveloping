@@ -14,12 +14,16 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
 import java.lang.reflect.Modifier
 import androidx.compose.material3.Scaffold
+import com.example.appinfo.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar (title: String, scaffoldState: ScaffoldState){
+fun MainTopBar (
+    title: String,
+    scaffoldState: ScaffoldState,
+    onFavClick: () -> Unit
+){
     val coroutine = rememberCoroutineScope()
-
     TopAppBar(title = {
             Text(text = title)
         },
@@ -41,7 +45,7 @@ fun MainTopBar (title: String, scaffoldState: ScaffoldState){
         actions = {
             IconButton(
                 onClick = {
-
+                    onFavClick()
                 }
             ) {
                 Icon(

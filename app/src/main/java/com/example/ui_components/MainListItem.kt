@@ -91,6 +91,7 @@ fun MainListItem (
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Favorite",
+                    tint = if(item.isFav) MainRed else Color.White,
                     modifier = Modifier
                         .clip(CircleShape)
                         .background(BgTrans)
