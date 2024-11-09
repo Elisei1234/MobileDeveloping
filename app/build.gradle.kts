@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mobiledeveloping"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -50,8 +50,9 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.accompanist:accompanist-pager:0.19.0")
-    implementation ("com.google.accompanist:accomanist-pager-indicators:0.27.1")
+    implementation("com.android.volley:volley:1.2.1")
+     implementation ("com.google.accompanist:accompanist-pager:0.19.0")
+     implementation ("com.google.accompanist:accompanist-pager-indicators:0.19.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("com.android.volley:volley:1.2.1")

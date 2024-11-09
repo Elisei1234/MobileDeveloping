@@ -10,18 +10,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +33,11 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.mobiledeveloping.R
 import com.example.mobiledeveloping.data.WeatherModel
+import com.example.mobiledeveloping.ui.theme.BlueLight
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 @Preview(showBackground = true)
@@ -116,7 +119,8 @@ fun MainScreen (){
                     ){
                         Icon(
                             painter = painterResource(id = R.drawable.ic_synch),
-                            contentDescription = "im4"
+                            contentDescription = "im4",
+                            tint = Color.White
                         )
                     }
                 }
@@ -127,9 +131,9 @@ fun MainScreen (){
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
-fun TabLayout(){
+fun TabLayout(daysList: MutableState<List<WeatherModel>>){
     val tabList = listOf("HOURS", "DAYS")
     val pagerState = rememberPagerState()
     val tabIndex = pagerState.currentPage
@@ -146,9 +150,9 @@ fun TabLayout(){
             selectedTabIndex = tabIndex,
             indicator = {pos ->
                 TabRowDefaults.Indicator(
-                    modifier = Modifier.tabIndicatorOffset(pos[tabIndex])
-                )
+                    modifier = Modifier.pagerTabIndicatorOffset(pagerState, pos))
             },
+            backgroundColor = BlueLight,
             contentColor = Color.White
         ){
             tabList.forEachIndexed{index, text ->
@@ -166,7 +170,7 @@ fun TabLayout(){
             }
         }
         HorizontalPager(
-            pageCount = tabList.size,
+            count = tabList.size,
             state = pagerState,
             modifier = Modifier.weight(1.0f)
         ){
@@ -175,30 +179,9 @@ fun TabLayout(){
                 modifier = Modifier.fillMaxSize()
             ){
                 itemsIndexed(
-                    listOf(
-                        WeatherModel(
-                            "London",
-                                "10:00",
-                                    "25°C",
-                            "Sunny",
-                            "//cdn.weatherapi.com/weather/64x64/day/176.png",
-                            "",
-                            "",
-                            ""
-                        ),
-                        WeatherModel(
-                            "London",
-                        "26/07/2024",
-                        "",
-                        "Sunny",
-                        "//cdn.weatherapi.com/weather/64x64/day/176.png",
-                        "26°",
-                        "12°",
-                        "fgdgdfgd"
-                    )
-                    )
-                ){
-                    _, item -> ListItem(item)
+                    daysList.value
+                ) {_, item ->
+                    ListItem(item)
                 }
             }
         }
