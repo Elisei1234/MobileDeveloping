@@ -4,12 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Tab
@@ -38,6 +35,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+
 
 @Composable
 fun MainScreen (currentDay:  MutableState<WeatherModel>){
@@ -136,7 +135,7 @@ fun MainScreen (currentDay:  MutableState<WeatherModel>){
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
-fun TabLayout(daysList: MutableState<List<WeatherModel>>){
+fun TabLayout(daysList: MutableState<List<WeatherModel>>, currentDay: MutableState<WeatherModel>){
     val tabList = listOf("HOURS", "DAYS")
     val pagerState = rememberPagerState()
     val tabIndex = pagerState.currentPage
@@ -176,17 +175,21 @@ fun TabLayout(daysList: MutableState<List<WeatherModel>>){
             count = tabList.size,
             state = pagerState,
             modifier = Modifier.weight(1.0f)
-        ){
-            index ->
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ){
-                itemsIndexed(
-                    daysList.value
-                ) {_, item ->
-                    ListItem(item)
-                }
-            }
+        ){index ->
+            MainList(daysList.value, currentDay)
         }
+    }
+}
+
+private fun getWeatherByHours(hours: String): List<WeatherModel>{
+    if (hours.isEmpty()) return listOf()
+    val hoursArray = JSONArray(hours)
+    val list = ArrayList<WeatherModel>()
+    for (i in 0 until hoursArray.length()){
+        list.add(
+            WeatherModel(
+
+            )
+        )
     }
 }
