@@ -40,7 +40,7 @@ import org.json.JSONObject
 
 
 @Composable
-fun MainScreen (currentDay:  MutableState<WeatherModel>){
+fun MainScreen (currentDay:  MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit){
     Column(
         modifier = Modifier
             .padding(5.dp),
@@ -103,7 +103,7 @@ fun MainScreen (currentDay:  MutableState<WeatherModel>){
                 ){
                     IconButton(
                         onClick = {
-
+                            onClickSearch.invoke()
                     }
                     ) {
                         Icon(
@@ -121,7 +121,7 @@ fun MainScreen (currentDay:  MutableState<WeatherModel>){
                     )
                     IconButton(
                         onClick = {
-
+                            onClickSync.invoke()
                         }
                     ){
                         Icon(
