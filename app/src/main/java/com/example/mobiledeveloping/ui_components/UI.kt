@@ -1,5 +1,6 @@
 package com.example.mobiledeveloping.ui_components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,24 +25,27 @@ import coil.compose.AsyncImage
 import com.example.mobiledeveloping.data.WeatherModel
 
 @Composable
-fun MainList(list: List<WeatherModel>, currentDays: MutableState<WeatherModel>){
+fun MainList(list: List<WeatherModel>, currentDay: MutableState<WeatherModel>){
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ){
         itemsIndexed(
             list
         ) {_, item ->
-            ListItem(item)
+            ListItem(item, currentDay)
         }
     }
 }
 
 @Composable
-fun ListItem (item: WeatherModel){
+fun ListItem (item: WeatherModel, currentDay: MutableState<WeatherModel>){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 3.dp),
+            .padding(top = 3.dp).clickable{
+                if(item.hours.isEmpty()) return@clickable
+                currentDay.value = item
+            },
         shape = RoundedCornerShape(5.dp)
     ){
         Row(

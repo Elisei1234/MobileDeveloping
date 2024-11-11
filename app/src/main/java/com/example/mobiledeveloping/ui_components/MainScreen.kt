@@ -36,6 +36,7 @@ import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 @Composable
@@ -83,7 +84,11 @@ fun MainScreen (currentDay:  MutableState<WeatherModel>){
                     color = Color.White
                 )
                 Text(
-                    text = currentDay.value.currentTemp.toFloat().toInt().toString() + "°C",
+                    text = if(currentDay.value.currentTemp.isNotEmpty())
+                        currentDay.value.currentTemp.toFloat().toInt().toString() + "°C"
+                    else currentDay.value.maxTemp.toFloat().toInt().toString() +
+                            "°C/${currentDay.value.minTemp.toFloat().toInt()}°C"
+                    ,
                     style = TextStyle(fontSize = 65.sp),
                     color = Color.White
                 )
@@ -176,7 +181,12 @@ fun TabLayout(daysList: MutableState<List<WeatherModel>>, currentDay: MutableSta
             state = pagerState,
             modifier = Modifier.weight(1.0f)
         ){index ->
-            MainList(daysList.value, currentDay)
+            val list = when(index){
+                0 -> getWeatherByHours(currentDay.value.hours)
+                1 -> daysList.value
+                else -> daysList.value
+            }
+            MainList(list, currentDay)
         }
     }
 }
@@ -186,10 +196,19 @@ private fun getWeatherByHours(hours: String): List<WeatherModel>{
     val hoursArray = JSONArray(hours)
     val list = ArrayList<WeatherModel>()
     for (i in 0 until hoursArray.length()){
+        val item = hoursArray[i] as JSONObject
         list.add(
             WeatherModel(
-
+                "",
+                item.getString("time"),
+                item.getString("temp_c").toFloat().toInt().toString() + "°C",
+                item.getJSONObject("condition").getString("text"),
+                item.getJSONObject("condition").getString("icon"),
+                "",
+                "",
+                ""
             )
         )
     }
+    return list
 }
