@@ -62,6 +62,8 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.5.2")
     kapt ("androidx.room:room-compiler:2.5.2")
 
+
+    def nav_version = ("2.5.3")
     implementation("androidx.navigation:navigation:compose - $nav_version")
 
     implementation("androidx.core:core-ktx:1.9.0")

@@ -1,5 +1,7 @@
 package com.example.ui_components
 
+import androidx.compose.foundation.background
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
@@ -10,11 +12,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
-import java.lang.reflect.Modifier
-import androidx.compose.material3.Scaffold
-import com.example.appinfo.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,7 +27,7 @@ fun MainTopBar (
     TopAppBar(title = {
             Text(text = title)
         },
-        backgroundColor = Color.White,
+        Modifier.background(Color.White),
         navigationIcon = {
             IconButton(
                 onClick = {
