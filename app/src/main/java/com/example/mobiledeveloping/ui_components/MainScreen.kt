@@ -41,6 +41,7 @@ import org.json.JSONObject
 
 @Composable
 fun MainScreen (currentDay:  MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit){
+
     Column(
         modifier = Modifier
             .padding(5.dp),
