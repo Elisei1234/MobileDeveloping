@@ -1,5 +1,7 @@
 package com.example.mobiledeveloping.data
 
+import com.example.mobiledeveloping.ui_components.HourDto
+
 data class WeatherModel(
     val city: String,
     val time: String,
@@ -8,5 +10,6 @@ data class WeatherModel(
     val icon: String,
     val maxTemp: String,
     val minTemp: String,
-    val hours:String
+    val hours: List<HourDto>
 )
+
