@@ -1,8 +1,12 @@
 package com.example.appinfo
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.appinfo.db.MainDb
+import com.example.utils.ListItem
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 @HiltViewModel
