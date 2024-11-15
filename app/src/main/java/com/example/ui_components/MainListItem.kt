@@ -1,41 +1,46 @@
 package com.example.ui_components
 
 import android.graphics.BitmapFactory
-import android.text.Layout
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Card
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.wear.compose.material3.IconButton
 import com.example.appinfo.MainViewModel
 import com.example.appinfo.ui.theme.BgTrans
 import com.example.appinfo.ui.theme.MainRed
-import com.example.mobiledeveloping.R
-import com.example.utils.DrawerEvents
 import com.example.utils.ListItem
-import java.lang.reflect.Modifier
 
 
 @Composable
-fun MainListItem (
+fun MainListItem(
     mainViewModel: MainViewModel = hiltViewModel(),
     item: ListItem,
-    onClick:(ListItem) -> Unit
-){
+    onClick: (ListItem) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,8 +59,9 @@ fun MainListItem (
 
             AssetImage(imageName = item.imageName,
                 contentDescription = item.title,
-                modifier = Modifier.fillMaxSize()
-                    .constrainAs(image){
+                modifier = Modifier
+                    .fillMaxSize()
+                    .constrainAs(image) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
@@ -68,7 +74,7 @@ fun MainListItem (
                     .fillMaxWidth()
                     .background(MainRed)
                     .padding(10.dp)
-                    .constrainAs(text){
+                    .constrainAs(text) {
                         bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
@@ -84,14 +90,16 @@ fun MainListItem (
                     )
 
                 },
-                modifier = Modifier.constrainAs(favoriteButton)
+                modifier = Modifier.constrainAs(favoriteButton) {
+
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
-            ){
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Favorite",
-                    tint = if(item.isFav) MainRed else Color.White,
+                    tint = if (item.isFav) MainRed else Color.White,
                     modifier = Modifier
                         .clip(CircleShape)
                         .background(BgTrans)
@@ -103,7 +111,7 @@ fun MainListItem (
 }
 
 @Composable
-fun AssetImage(imageName:String, contentDescription: String, modifier: Modifier){
+fun AssetImage(imageName: String, contentDescription: String, modifier: Modifier) {
     val context = LocalContext.current
     val assetManager = context.assets
     val inputStream = assetManager.open(imageName)
@@ -113,5 +121,5 @@ fun AssetImage(imageName:String, contentDescription: String, modifier: Modifier)
         contentDescription = contentDescription,
         contentScale = ContentScale.Crop,
         modifier = modifier
-        )
+    )
 }

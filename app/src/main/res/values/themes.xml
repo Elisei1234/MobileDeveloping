@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.MobileDeveloping" parent="android:Theme.Material.Light.NoActionBar" />
-        <item name="android:statusBarColor" >@color/gray</item>
+
     <style name="Theme.AppInfo" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

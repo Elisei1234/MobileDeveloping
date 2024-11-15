@@ -1,55 +1,55 @@
 package com.example.ui_components
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.appinfo.MainViewModel
 import com.example.utils.DrawerEvents
 import com.example.utils.ListItem
+import kotlinx.coroutines.launch
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen (
+fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
     onClick: (ListItem) -> Unit
-){
+) {
+    val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCaroutineScope()
     val mainList = mainViewModel.mainList
     val topBarTitle = remember {
         mutableStateOf("Грибы")
     }
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         mainViewModel.getAllItemsByCategory(topBarTitle.value)
     }
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             MainTopBar(
                 title = topBarTitle.value,
-                scaffoldState
-            ){
+                scaffoldState = scaffoldState
+            ) {
                 topBarTitle.value = "Избранное"
                 mainViewModel.getFavorites()
             }
         },
         drawerContent = {
-            Drawer_menu() { event ->
+            DrawerMenu() { event ->
                 when (event) {
                     is DrawerEvents.OnItemClick -> {
                         topBarTitle.value = event.title
-                        mainViewModel.getAllItemsBycategory(event.title)
+                        mainViewModel.getAllItemsByCategory(event.title)
 
                     }
                 }
@@ -59,10 +59,11 @@ fun MainScreen (
 
             }
         }
-    ) {
+    ) { paddingValues ->
+        paddingValues
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(mainList.value) { item ->
-                MainListItem(item = item){listItem ->
+                MainListItem(item = item) { listItem ->
                     onClick(listItem)
                 }
             }

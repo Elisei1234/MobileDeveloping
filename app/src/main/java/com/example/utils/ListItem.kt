@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity (tableName = "main")
 data class ListItem(
-    @PrimaryKey (autogenerate = true)
+    @PrimaryKey (autoGenerate = true)
     val id:Int? = null,
     val title: String,
     val imageName: String,

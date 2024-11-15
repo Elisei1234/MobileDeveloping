@@ -1,13 +1,13 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace = "com.example.mobiledeveloping"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.mobiledeveloping"
@@ -32,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -52,18 +52,14 @@ android {
 }
 
 dependencies {
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
-    implementation 'com.google.dagger:hilt-android:2.46.1'
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    kapt 'com.google.dagger:hilt-compiler:2.46.1'
+    implementation ("com.google.dagger:hilt-android:2.46.1")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    kapt ("com.google.dagger:hilt-compiler:2.46.1")
 
-    implementation 'androidx.room:room-ktx:2.5.2'
-    kapt 'androidx.room:room-compiler:2.5.2'
-
-
-    def nav_version = "2.5.3"
-    implementation("androidx.navigation:navigation - compose:$nav_version")
+    implementation ("androidx.room:room-ktx:2.5.2")
+    kapt ("androidx.room:room-compiler:2.5.2")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -72,7 +68,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material:1.4.3")
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.room.common)
